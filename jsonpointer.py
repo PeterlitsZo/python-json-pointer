@@ -193,7 +193,7 @@ class JsonPointer(object):
         for part in self.parts[:-1]:
             doc = self.walk(doc, part)
 
-        return doc, self.get_part(doc, self.parts[-1])
+        return doc, JsonPointer.get_part(doc, self.parts[-1])
 
     def resolve(self, doc, default=_nothing):
         """Resolves the pointer against doc and returns the referenced object"""
@@ -257,7 +257,7 @@ class JsonPointer(object):
     def walk(self, doc, part):
         """ Walks one step in doc and returns the referenced part """
 
-        part = self.get_part(doc, part)
+        part = JsonPointer.get_part(doc, part)
 
         assert hasattr(doc, '__getitem__'), "invalid document type %s" % (type(doc),)
 
